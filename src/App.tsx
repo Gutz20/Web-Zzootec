@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { NotFound } from "./components";
+import { ForgotPassword, Layout, NotFound } from "./components";
 import { Dashboard, Login } from "./pages";
 
 function App() {
@@ -9,11 +9,24 @@ function App() {
       path: "/",
       element: <Login />,
       errorElement: <NotFound />,
+    },
+    {
+      path: "/forgotPassword",
+      element: <ForgotPassword />,
+      errorElement: <NotFound />,
+    },
+    {
+      path: "/dashboard",
+      element: <Layout />,
+      errorElement: <NotFound />,
       children: [
         {
           index: true,
-          path: "/dashboard",
           element: <Dashboard />,
+        },
+        {
+          path: "/dashboard/clientes",
+          element: <div>Clientes</div>,
         },
       ],
     },

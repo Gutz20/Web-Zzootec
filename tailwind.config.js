@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        loginPattern: "url('/bg-login.jpg')",
+        loginPattern: "url('/bg-login.png')",
       },
       fontFamily: {
         monserrat: ["monserrat"],
