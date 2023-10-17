@@ -1,6 +1,7 @@
 import { columnsDelivery, rowsDelivery } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
 
 const Delivery = () => {
   return (
@@ -9,12 +10,14 @@ const Delivery = () => {
         <h2 className="text-4xl font-bold">Delivery</h2>
 
         <div className="flex gap-4">
-          <Button
-            color="info"
-            variant="contained"
-          >
-            Nuevo
-          </Button>
+          <Link to="/dashboard/delivery/1">
+            <Button
+              color="info"
+              variant="contained"
+            >
+              Nuevo
+            </Button>
+          </Link>
           <Button
             color="success"
             variant="contained"

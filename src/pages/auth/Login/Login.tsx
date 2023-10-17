@@ -1,4 +1,4 @@
-import { FormSchema, formValidationSchema } from "@/types/Login";
+import { FormSchemaLogin, formLoginSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -20,14 +20,14 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(formValidationSchema),
+  } = useForm<FormSchemaLogin>({
+    resolver: zodResolver(formLoginSchema),
     mode: "onChange",
   });
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
+  const onSubmit: SubmitHandler<FormSchemaLogin> = async (data) => {
     if (data.username === "admin" && data.password === "123456")
       navigate("/dashboard");
     else

@@ -1,4 +1,4 @@
-import { FormSchema, formValidationSchema } from "@/types/Login";
+import { FormSchemaLogin, formLoginSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -14,14 +14,14 @@ const ForgotPassword = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(formValidationSchema),
+  } = useForm<FormSchemaLogin>({
+    resolver: zodResolver(formLoginSchema),
     mode: "onChange",
   });
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<FormSchema> = async () => {
+  const onSubmit: SubmitHandler<FormSchemaLogin> = async () => {
     toast.success("Login exitoso!", { theme: "dark" });
 
     setTimeout(() => {

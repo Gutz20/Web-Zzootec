@@ -5,6 +5,7 @@ import {
   Customers,
   Dashboard,
   Delivery,
+  DeliveryId,
   Employees,
   Login,
   Marketing,
@@ -40,6 +41,10 @@ function App() {
         {
           path: "/dashboard/delivery",
           element: <Delivery />,
+        },
+        {
+          path: "/dashboard/delivery/:deliveryId",
+          element: <DeliveryId />,
         },
         {
           path: "/dashboard/orders",

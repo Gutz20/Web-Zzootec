@@ -1,5 +1,6 @@
 export * from "./DrawerNav";
-export { default as ForgotPassword } from "./ForgotPassword/ForgotPassword";
+export * from "./ForgotPassword";
+export { default as Header } from "./Header/Header";
 export * from "./Layout";
 export * from "./Navbar";
 export * from "./NotFound";
