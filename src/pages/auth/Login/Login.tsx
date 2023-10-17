@@ -27,12 +27,14 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<FormSchema> = async () => {
-    toast.success("Login exitoso!", { theme: "dark" });
-
-    setTimeout(() => {
+  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
+    if (data.username === "admin" && data.password === "123456")
       navigate("/dashboard");
-    }, 4000);
+    else
+      toast.error("Usuario o contraseña incorrectos!", {
+        theme: "light",
+        position: "top-center",
+      });
   };
 
   return (

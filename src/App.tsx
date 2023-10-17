@@ -1,7 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { ForgotPassword, Layout, NotFound } from "./components";
-import { Dashboard, Login } from "./pages";
+import {
+  Customers,
+  Dashboard,
+  Delivery,
+  Employees,
+  Login,
+  Marketing,
+  Orders,
+  Products,
+} from "./pages";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,8 +34,28 @@ function App() {
           element: <Dashboard />,
         },
         {
-          path: "/dashboard/clientes",
-          element: <div>Clientes</div>,
+          path: "/dashboard/customers",
+          element: <Customers />,
+        },
+        {
+          path: "/dashboard/delivery",
+          element: <Delivery />,
+        },
+        {
+          path: "/dashboard/orders",
+          element: <Orders />,
+        },
+        {
+          path: "/dashboard/products",
+          element: <Products />,
+        },
+        {
+          path: "/dashboard/employees",
+          element: <Employees />,
+        },
+        {
+          path: "/dashboard/marketing",
+          element: <Marketing />,
         },
       ],
     },
