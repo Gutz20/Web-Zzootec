@@ -68,7 +68,7 @@ const Sidebar = () => {
                 to="/dashboard/orders"
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
               >
-                <RiShoppingBagLine className="text-green-300" /> Ordenes
+                <RiShoppingBagLine className="text-green-300" /> Pedidos
               </Link>
             </li>
             <li>
