@@ -10,4 +10,6 @@ export * from "./admin/Marketing";
 export * from "./admin/Orders";
 export * from "./admin/Products";
 export * from "./admin/Reports";
+export * from "./admin/Subsidiaries";
+export * from "./admin/Suppliers";
 export * from "./auth/Login";

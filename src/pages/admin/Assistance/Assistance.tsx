@@ -7,28 +7,16 @@ import {
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
+import Clock from "react-clock";
+import "react-clock/dist/Clock.css";
 import { RiChat2Line, RiDirectionLine } from "react-icons/ri";
-
-const CLOCK_OPTIONS = {
-  baseOptions: {
-    baseColor: "#aaaaaa",
-    labelColor: "#d97a90",
-    showNumbers: false,
-    size: 400,
-  },
-  handColors: {
-    second: "#d81c7a",
-    minute: "#459cff",
-    hour: "#446aaa",
-  },
-};
 
 const Assistance = () => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
-    return function cleanup() {
+    return () => {
       clearInterval(timer);
     };
   }, []);
@@ -87,17 +75,19 @@ const Assistance = () => {
         </div>
 
         <div className="bg-gray-100 p-4 grid grid-cols-2">
-          {/* <span className="flex items-center justify-center text-4xl font-bold">
-            Hora: {time.toLocaleTimeString()}
-          </span>
-          <TimeClock views={["hours"]} /> */}
+          <div className="flex flex-col items-center justify-center">
+            <Clock value={time} />
+            <span className="flex items-center justify-center text-2xl my-2 font-bold">
+              Hora: {time.toLocaleTimeString()}
+            </span>
+          </div>
           <div className="flex flex-col items-center justify-center gap-4">
             <Button
               color="success"
               variant="outlined"
               className="w-36"
             >
-              Guardar
+              Marcar
             </Button>
             <Button
               color="info"
@@ -120,7 +110,6 @@ const Assistance = () => {
             >
               <RiChat2Line className="mr-2" /> <span>Asistencia</span>
             </Button>
-            T
           </div>
         </div>
       </div>

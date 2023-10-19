@@ -483,3 +483,81 @@ export const columnsReports: GridColDef[] = [
     editable: true,
   },
 ];
+
+export const rowsSubsidiaries = [
+  {
+    id: 1,
+    local: "No se",
+    names: "Juan Zapata",
+    address: "Avenida Siempre Viva",
+    phone: "932 322 232",
+    zone: "No se",
+    admin: "Supongo",
+  },
+  {
+    id: 2,
+    local: "No se",
+    names: "Juan Zapata",
+    address: "Avenida Siempre Viva",
+    phone: "932 322 232",
+    zone: "No se",
+    admin: "Supongo",
+  },
+  {
+    id: 3,
+    local: "No se",
+    names: "Juan Zapata",
+    address: "Avenida Siempre Viva",
+    phone: "932 322 232",
+    zone: "No se",
+    admin: "Supongo",
+  },
+  {
+    id: 4,
+    local: "No se",
+    names: "Juan Zapata",
+    address: "Avenida Siempre Viva",
+    phone: "932 322 232",
+    zone: "No se",
+    admin: "Supongo",
+  },
+];
+
+export const columnsSubsidiaries: GridColDef[] = [
+  {
+    field: "local",
+    headerName: "Local",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "names",
+    headerName: "Nombre",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "address",
+    headerName: "Dirección",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "phone",
+    headerName: "Telefono",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "zone",
+    headerName: "Zona",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "admin",
+    headerName: "Admin",
+    width: 200,
+    editable: true,
+  },
+];

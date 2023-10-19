@@ -6,10 +6,12 @@ import {
   RiBox3Line,
   RiCloseLine,
   RiFileList2Line,
+  RiHome4Line,
   RiLogoutCircleRLine,
   RiMenu3Line,
   RiNodeTree,
   RiShoppingBagLine,
+  RiSkipUpLine,
   RiTruckLine,
   RiUser2Line,
   RiUser3Fill,
@@ -103,6 +105,22 @@ const Sidebar = () => {
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
               >
                 <RiBookMarkFill className="text-green-300" /> Asistencia
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/subsidiaries"
+                className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
+              >
+                <RiHome4Line className="text-green-300" /> Sucursales
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/suppliers"
+                className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
+              >
+                <RiSkipUpLine className="text-green-300" /> Proveedores
               </Link>
             </li>
             {/* <li>

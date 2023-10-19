@@ -13,6 +13,8 @@ import {
   Orders,
   Products,
   Reports,
+  Subsidiaries,
+  Suppliers,
 } from "./pages";
 
 function App() {
@@ -71,6 +73,14 @@ function App() {
         {
           path: "/dashboard/assistance",
           element: <Assistance />,
+        },
+        {
+          path: "/dashboard/subsidiaries",
+          element: <Subsidiaries />,
+        },
+        {
+          path: "/dashboard/suppliers",
+          element: <Suppliers />,
         },
       ],
     },

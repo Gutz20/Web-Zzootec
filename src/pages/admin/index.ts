@@ -9,3 +9,5 @@ export * from "./Marketing";
 export * from "./Orders";
 export * from "./Products";
 export * from "./Reports";
+export * from "./Subsidiaries";
+export * from "./Suppliers";
