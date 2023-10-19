@@ -37,6 +37,13 @@ const Login = () => {
       });
   };
 
+  // const onError: SubmitErrorHandler<FormSchemaLogin> = async (data) => {
+  //   toast.error(`test ${data.username}`, {
+  //     theme: "light",
+  //     position: "top-center",
+  //   });
+  // };
+
   return (
     <div
       id="particles-js"

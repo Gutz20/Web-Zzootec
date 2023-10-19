@@ -96,6 +96,7 @@ export const rowsDelivery = [
     phoneNumber: "932 546 856",
     numberRandom: "31232133",
     address: "Avenida Siempre Viva",
+    description: "Descripcion",
   },
   {
     id: 2,
@@ -104,6 +105,7 @@ export const rowsDelivery = [
     phoneNumber: "954 785 985",
     numberRandom: "4565765",
     address: "Nueva Direccion 😏",
+    description: "Descripcion",
   },
   {
     id: 3,
@@ -112,6 +114,7 @@ export const rowsDelivery = [
     phoneNumber: "932 546 856",
     numberRandom: "31232133",
     address: "Avenida Siempre Viva",
+    description: "Descripcion",
   },
   {
     id: 4,
@@ -120,6 +123,7 @@ export const rowsDelivery = [
     phoneNumber: "932 546 856",
     numberRandom: "31232133",
     address: "Avenida Siempre Viva",
+    description: "Descripcion",
   },
   {
     id: 5,
@@ -128,6 +132,7 @@ export const rowsDelivery = [
     phoneNumber: "932 546 856",
     numberRandom: "31232133",
     address: "Avenida Siempre Viva",
+    description: "Descripcion",
   },
   {
     id: 6,
@@ -136,6 +141,7 @@ export const rowsDelivery = [
     phoneNumber: "932 546 856",
     numberRandom: "31232133",
     address: "Avenida Siempre Viva",
+    description: "Descripcion",
   },
 ];
 
@@ -168,6 +174,12 @@ export const columnsDelivery: GridColDef[] = [
   {
     field: "address",
     headerName: "Dirección",
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "description",
+    headerName: "Descripción",
     width: 200,
     editable: true,
   },
@@ -294,7 +306,7 @@ export const rowsEmployees = [
 ];
 
 export const columnsEmployees: GridColDef[] = [
-  { field: "id", headerName: "Codigo", width: 90 },
+  { field: "id", headerName: "Id", width: 90 },
   {
     field: "name",
     headerName: "Empleado",
@@ -408,6 +420,66 @@ export const columnsMarketing: GridColDef[] = [
     field: "description",
     headerName: "Descripcion",
     width: 200,
+    editable: true,
+  },
+];
+
+export const rowsReports = [
+  {
+    id: 1,
+    form: "Marketing",
+    user: "Juan",
+    date: "20/06/2022",
+  },
+  {
+    id: 2,
+    form: "Marketing",
+    user: "Juan",
+    date: "20/06/2022",
+  },
+  {
+    id: 3,
+    form: "Marketing",
+    user: "Juan",
+    date: "20/06/2022",
+  },
+  {
+    id: 4,
+    form: "Marketing",
+    user: "Juan",
+    date: "20/06/2022",
+  },
+  {
+    id: 5,
+    form: "Marketing",
+    user: "Juan",
+    date: "20/06/2022",
+  },
+  {
+    id: 6,
+    form: "Marketing",
+    user: "Juan",
+    date: "20/06/2022",
+  },
+];
+
+export const columnsReports: GridColDef[] = [
+  {
+    field: "form",
+    headerName: "Formulario",
+    width: 400,
+    editable: true,
+  },
+  {
+    field: "user",
+    headerName: "Usuario",
+    width: 400,
+    editable: true,
+  },
+  {
+    field: "date",
+    headerName: "Fecha",
+    width: 400,
     editable: true,
   },
 ];

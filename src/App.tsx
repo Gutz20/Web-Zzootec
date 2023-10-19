@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { ForgotPassword, Layout, NotFound } from "./components";
 import {
+  Assistance,
   Customers,
   Dashboard,
   Delivery,
@@ -11,6 +12,7 @@ import {
   Marketing,
   Orders,
   Products,
+  Reports,
 } from "./pages";
 
 function App() {
@@ -61,6 +63,14 @@ function App() {
         {
           path: "/dashboard/marketing",
           element: <Marketing />,
+        },
+        {
+          path: "/dashboard/reports",
+          element: <Reports />,
+        },
+        {
+          path: "/dashboard/assistance",
+          element: <Assistance />,
         },
       ],
     },

@@ -1,19 +1,13 @@
 import { Fab } from "@mui/material";
 import { useState } from "react";
 import {
-  RiArrowRightSLine,
   RiBarChart2Line,
   RiBookMarkFill,
   RiBox3Line,
-  RiCalendarTodoLine,
   RiCloseLine,
-  RiContactsBookUploadFill,
-  RiEarthLine,
   RiFileList2Line,
-  RiHome2Line,
   RiLogoutCircleRLine,
   RiMenu3Line,
-  RiMessage3Line,
   RiNodeTree,
   RiShoppingBagLine,
   RiTruckLine,
@@ -97,7 +91,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/dashboard/marketing"
+                to="/dashboard/reports"
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
               >
                 <RiFileList2Line className="text-green-300" /> Reportes
@@ -105,13 +99,13 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/dashboard/marketing"
+                to="/dashboard/assistance"
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
               >
                 <RiBookMarkFill className="text-green-300" /> Asistencia
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/dashboard/marketing"
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
@@ -189,7 +183,7 @@ const Sidebar = () => {
               >
                 <RiCalendarTodoLine className="text-green-300" /> Calendario
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <nav>

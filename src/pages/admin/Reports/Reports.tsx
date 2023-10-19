@@ -1,16 +1,16 @@
-import { columnsDelivery, rowsDelivery } from "@/helpers/data";
+import { columnsReports, rowsReports } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 
-const Delivery = () => {
+const Reports = () => {
   return (
     <div>
       <div className="flex flex-row justify-between mb-4">
-        <h2 className="text-4xl font-bold">Delivery</h2>
+        <h2 className="text-4xl font-bold">Reportes</h2>
 
         <div className="flex gap-4">
-          <Link to="/dashboard/delivery/1">
+          <Link to="">
             <Button
               color="info"
               variant="contained"
@@ -41,8 +41,8 @@ const Delivery = () => {
 
       <div>
         <DataGrid
-          rows={rowsDelivery}
-          columns={columnsDelivery}
+          rows={rowsReports}
+          columns={columnsReports}
           initialState={{
             pagination: {
               paginationModel: {
@@ -65,4 +65,4 @@ const Delivery = () => {
   );
 };
 
-export default Delivery;
+export default Reports;

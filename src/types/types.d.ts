@@ -8,11 +8,11 @@ export const formLoginSchema = z.object({
 export type FormSchemaLogin = z.infer<typeof formLoginSchema>;
 
 export const formDeliverySchema = z.object({
-  username: z.string().min(3, { message: "El usuario debe ser mayor de 3" }),
-  state: z.string(),
-  description: z.string(),
+  user: z.string().min(3, { message: "El usuario debe ser mayor de 3" }),
   idPedido: z.number(),
+  state: z.string(),
   ubication: z.string(),
+  description: z.string(),
   date: z.date(),
 });
 
