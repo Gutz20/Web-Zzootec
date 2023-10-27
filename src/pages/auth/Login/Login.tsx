@@ -1,8 +1,11 @@
+import { getCurrentUserRequest, loginRequest } from "@/api/auth";
+import { getUserRequest } from "@/api/users";
+import { useAuthStore } from "@/store";
 import { FormSchemaLogin, formLoginSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, SubmitErrorHandler, useForm } from "react-hook-form";
 import {
   RiEyeFill,
   RiEyeOffFill,
@@ -25,24 +28,27 @@ const Login = () => {
     mode: "onChange",
   });
 
+  const setToken = useAuthStore((state) => state.setToken);
+  const setUser = useAuthStore((state) => state.setUser);
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FormSchemaLogin> = async (data) => {
-    if (data.username === "admin" && data.password === "123456")
-      navigate("/dashboard");
-    else
-      toast.error("Usuario o contraseña incorrectos!", {
-        theme: "light",
-        position: "top-center",
-      });
+    const resLogin = await loginRequest(data);
+    console.log(resLogin);
+    setToken(resLogin.data.token);
+
+    const resUser = await getCurrentUserRequest();
+    setUser(resUser.data);
+
+    navigate(`/dashboard`);
   };
 
-  // const onError: SubmitErrorHandler<FormSchemaLogin> = async (data) => {
-  //   toast.error(`test ${data.username}`, {
-  //     theme: "light",
-  //     position: "top-center",
-  //   });
-  // };
+  const onError: SubmitErrorHandler<FormSchemaLogin> = async (data) => {
+    toast.error(`test ${data.username?.message || data.password?.message}`, {
+      theme: "light",
+      position: "top-center",
+    });
+  };
 
   return (
     <div
@@ -60,7 +66,7 @@ const Login = () => {
         </h1>
         <form
           className="flex flex-col gap-2 w-full"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit, onError)}
         >
           <div className="mb-2">
             <div className="relative">

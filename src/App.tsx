@@ -16,8 +16,11 @@ import {
   Subsidiaries,
   Suppliers,
 } from "./pages";
+import { useAuthStore } from "./store";
 
 function App() {
+  const isAuth = useAuthStore((state) => state.isAuth);
+
   const router = createBrowserRouter([
     {
       path: "/",
