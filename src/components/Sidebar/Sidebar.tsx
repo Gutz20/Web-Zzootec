@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store";
 import { Fab } from "@mui/material";
 import { useState } from "react";
 import {
@@ -16,11 +17,19 @@ import {
   RiUser2Line,
   RiUser3Fill,
 } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSubmenu, setShowSubmenu] = useState(false);
+
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <>
@@ -206,8 +215,9 @@ const Sidebar = () => {
         </div>
         <nav>
           <Link
-            to="/dashboard"
+            to="/"
             className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
+            onClick={onLogout}
           >
             <RiLogoutCircleRLine className="text-green-300" /> Cerrar Sesion
           </Link>

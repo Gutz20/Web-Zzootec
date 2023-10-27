@@ -10,16 +10,13 @@ interface Props {
 const ProtectedRoute = ({
   isAllowed,
   children,
-  redirectTo = "/login",
+  redirectTo = "/",
 }: Props) => {
-    if (!isAllowed) {
-        return <Navigate
-        to={redirectTo}
-        state={{ from: window.location.pathname }}
-        />
-    }
+  if (!isAllowed) {
+    return <Navigate to={redirectTo} />;
+  }
 
-    return children ? <>{children}</> : <Outlet />;
+  return children ? <>{children}</> : <Outlet />;
 };
 
 export default ProtectedRoute;

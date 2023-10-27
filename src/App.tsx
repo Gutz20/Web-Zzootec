@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { ForgotPassword, Layout, NotFound } from "./components";
+import { ForgotPassword, Layout, NotFound, ProtectedRoute } from "./components";
 import {
   Assistance,
   Customers,
@@ -34,7 +34,11 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <Layout />,
+      element: (
+        <ProtectedRoute isAllowed={isAuth}>
+          <Layout />
+        </ProtectedRoute>
+      ),
       errorElement: <NotFound />,
       children: [
         {

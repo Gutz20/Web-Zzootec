@@ -66,6 +66,7 @@ const renderCustomizedLabel = ({
 };
 
 const Dashboard = () => {
+
   return (
     <div>
       <h2 className="text-4xl font-bold">Dashboard</h2>
@@ -92,22 +93,12 @@ const Dashboard = () => {
             <Bar
               dataKey="pv"
               fill="#8884d8"
-              activeBar={
-                <Rectangle
-                  fill="pink"
-                  stroke="blue"
-                />
-              }
+              activeBar={<Rectangle fill="pink" stroke="blue" />}
             />
             <Bar
               dataKey="uv"
               fill="#82ca9d"
-              activeBar={
-                <Rectangle
-                  fill="gold"
-                  stroke="purple"
-                />
-              }
+              activeBar={<Rectangle fill="gold" stroke="purple" />}
             />
           </BarChart>
         </div>
@@ -142,16 +133,8 @@ const Dashboard = () => {
               type="number"
               label={{ value: "Time", angle: -90, position: "insideLeft" }}
             />
-            <Scatter
-              name="red"
-              dataKey="red"
-              fill="red"
-            />
-            <Scatter
-              name="blue"
-              dataKey="blue"
-              fill="blue"
-            />
+            <Scatter name="red" dataKey="red" fill="red" />
+            <Scatter name="blue" dataKey="blue" fill="blue" />
             <Line
               dataKey="blueLine"
               stroke="blue"
@@ -170,10 +153,7 @@ const Dashboard = () => {
         </div>
         {/* Grafico 3 */}
         <div>
-          <PieChart
-            width={400}
-            height={400}
-          >
+          <PieChart width={400} height={400}>
             <Pie
               data={dataPieChartWithCustomizedLabel}
               cx="50%"
@@ -205,10 +185,7 @@ const Dashboard = () => {
           >
             <PolarGrid />
             <PolarAngleAxis dataKey="subject" />
-            <PolarRadiusAxis
-              angle={30}
-              domain={[0, 150]}
-            />
+            <PolarRadiusAxis angle={30} domain={[0, 150]} />
             <Radar
               name="DOTAWC3.com"
               dataKey="A"

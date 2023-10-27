@@ -1,11 +1,10 @@
 import { getCurrentUserRequest, loginRequest } from "@/api/auth";
-import { getUserRequest } from "@/api/users";
 import { useAuthStore } from "@/store";
 import { FormSchemaLogin, formLoginSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { SubmitHandler, SubmitErrorHandler, useForm } from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import {
   RiEyeFill,
   RiEyeOffFill,
@@ -34,11 +33,10 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FormSchemaLogin> = async (data) => {
     const resLogin = await loginRequest(data);
-    console.log(resLogin);
     setToken(resLogin.data.token);
 
-    const resUser = await getCurrentUserRequest();
-    setUser(resUser.data);
+    // const resUser = await getCurrentUserRequest();
+    // setUser(resUser.data);
 
     navigate(`/dashboard`);
   };
@@ -77,6 +75,7 @@ const Login = () => {
                 placeholder="Nombre de Usuario"
                 className="py-3 pl-8 px-4 text-white bg-primaryZzootec1 outline-none rounded-lg w-full"
                 {...register("username")}
+                autoComplete="off"
               />
             </div>
             {errors.username && (
@@ -127,7 +126,12 @@ const Login = () => {
           </Link>
         </form>
       </div>
-
+      {/* <button
+        onClick={() => navigate("/dashboard")}
+        className="px-4 py-3 bg-primaryZzootec1 w-full rounded-lg mb-4  uppercase font-semibold tracking-wide hover:text-slate-500 transition-all"
+      >
+        Ingresar
+      </button> */}
       <ToastContainer />
       <DevTool control={control} />
     </div>
