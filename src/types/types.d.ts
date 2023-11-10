@@ -41,3 +41,11 @@ export const formProvidersSchema = z.object({
 });
 
 export type FormSchemaProviders = z.infer<typeof formProvidersSchema>;
+
+export const formCategorySchema = z.object({
+  // id: z.number().optional(),
+  name: z.string(),
+  // creation_date: z.date().nullable(),
+});
+
+export type FormSchemaCategory = z.infer<typeof formCategorySchema>;

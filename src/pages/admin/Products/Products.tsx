@@ -1,8 +1,12 @@
 import { columnsProducts, rowsProducts } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useEffect } from "react";
 
 const Products = () => {
+
+  
+
   return (
     <div>
       <div className="flex flex-row justify-between mb-4">

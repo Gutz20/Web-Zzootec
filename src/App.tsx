@@ -1,8 +1,13 @@
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { ForgotPassword, Layout, NotFound, ProtectedRoute } from "./components";
 import {
   Assistance,
+  Categories,
+  CategoryForm,
   Customers,
   Dashboard,
   Delivery,
@@ -20,6 +25,7 @@ import { useAuthStore } from "./store";
 
 function App() {
   const isAuth = useAuthStore((state) => state.isAuth);
+  const queryClient = new QueryClient();
 
   const router = createBrowserRouter([
     {
@@ -54,7 +60,11 @@ function App() {
           element: <Delivery />,
         },
         {
-          path: "/dashboard/delivery/:deliveryId",
+          path: "/dashboard/delivery/new",
+          element: <Delivery />,
+        },
+        {
+          path: "/dashboard/delivery/:id",
           element: <DeliveryId />,
         },
         {
@@ -64,6 +74,18 @@ function App() {
         {
           path: "/dashboard/products",
           element: <Products />,
+        },
+        {
+          path: "/dashboard/categories",
+          element: <Categories />,
+        },
+        {
+          path: "/dashboard/categories/new",
+          element: <CategoryForm />,
+        },
+        {
+          path: "/dashboard/categories/:id",
+          element: <CategoryForm />,
         },
         {
           path: "/dashboard/employees",
@@ -95,7 +117,11 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <RouterProvider router={router} />
+        </LocalizationProvider>
+      </QueryClientProvider>
     </>
   );
 }

@@ -262,6 +262,34 @@ export const columnsProducts: GridColDef[] = [
   },
 ];
 
+export const rowsCategories = [
+  {
+    id: 1,
+    name: "Test",
+    image: "",
+  },
+  {
+    id: 2,
+    name: "Test",
+    image: "",
+  },
+  {
+    id: 3,
+    name: "Test",
+    image: "",
+  },
+];
+
+export const columnsCategories: GridColDef[] = [
+  { field: "id", headerName: "Codigo", width: 90 },
+  {
+    field: "name",
+    headerName: "Nom. Producto",
+    width: 400,
+    editable: true,
+  },
+];
+
 export const rowsEmployees = [
   {
     id: 1,

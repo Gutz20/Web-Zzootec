@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   RiBarChart2Line,
   RiBookMarkFill,
+  RiBox2Line,
   RiBox3Line,
   RiCloseLine,
   RiFileList2Line,
@@ -38,11 +39,16 @@ const Sidebar = () => {
           showMenu ? "left-0" : "-left-full"
         } transition-all `}
       >
-        {/* TODO Ver si queda bien si no cambiar por el list de Material ui */}
         <div>
-          <h1 className="text-center text-2xl font-bold text-white mb-10">
-            Admin<span className="text-yellow-300 text-4xl">.</span>
-          </h1>
+          <div className="flex flex-col items-center justify-center mb-2">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="w-20 h-20 rounded-full"
+            />
+
+            <h1 className="font-bold text-3xl text-white">Zzootec</h1>
+          </div>
           <ul>
             <li>
               <Link
@@ -82,6 +88,14 @@ const Sidebar = () => {
                 className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
               >
                 <RiBox3Line className="text-green-300" /> Productos
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/categories"
+                className="flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-slate-950 text-white transition-colors"
+              >
+                <RiBox2Line className="text-green-300" /> Categorias
               </Link>
             </li>
             <li>
