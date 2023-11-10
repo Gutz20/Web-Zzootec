@@ -14,8 +14,6 @@ import {
   InputAdornment,
   InputLabel,
 } from "@mui/material";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RiUser2Line } from "react-icons/ri";
@@ -51,13 +49,13 @@ const CategoryForm = () => {
         updateCategoryRequest(Number(params.id), {
           name: data.name,
           id: Number(params.id),
-          creation_date: null,
+          creationDate: null,
         });
       } else {
         createCategoryRequest({
           name: data.name,
           id: null,
-          creation_date: null,
+          creationDate: null,
         });
       }
     } catch (error) {
@@ -83,6 +81,8 @@ const CategoryForm = () => {
                 }
                 {...register("name")}
                 error={errors.name ? true : false}
+                autoComplete="off"
+                autoFocus
               />
             </FormControl>
             <FormHelperText error={errors.name ? true : false}>

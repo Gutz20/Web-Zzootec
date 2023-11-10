@@ -17,3 +17,6 @@ export const updateCategoryRequest = async (
 
 export const deleteCategoryRequest = (id: number) =>
   axios.delete(`/api/v1/categories/${id}`);
+
+export const deleteMultipleCategoryRequest = async (ids: number[]) =>
+  await axios.delete(`/api/v1/categories/deleteMany`, { data: ids });

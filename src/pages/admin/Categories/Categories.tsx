@@ -1,10 +1,15 @@
-import { deleteCategoryRequest, getCategoriesRequest } from "@/api/categories";
+import {
+  deleteCategoryRequest,
+  deleteMultipleCategoryRequest,
+  getCategoriesRequest,
+} from "@/api/categories";
 import { columnsCategories } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridRowId, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Categories = () => {
   const queryClient = useQueryClient();
@@ -22,10 +27,20 @@ const Categories = () => {
     },
   });
 
+  const { mutateAsync: deleteMultCatMutation } = useMutation({
+    mutationFn: deleteMultipleCategoryRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+    },
+  });
+
+  console.log(categories);
+
   const rowsCategories = categories
     ? categories?.map((cat) => ({
         id: cat.id,
         name: cat.name,
+        creationDate: cat.creationDate,
       }))
     : [];
 
@@ -37,7 +52,19 @@ const Categories = () => {
 
   const handleDeleteClick = () => {
     if (selectedRowIds !== null) {
-      deleteCatMutation(selectedRowIds[0] as number);
+      if (selectedRowIds.length === 1) {
+        deleteCatMutation(selectedRowIds[0] as number);
+        toast("Fila eliminada", {
+          position: "bottom-right",
+          type: "success",
+        });
+      } else {
+        deleteMultCatMutation(selectedRowIds as number[]);
+        toast("Se eliminaron las filas seleccionadas", {
+          position: "bottom-right",
+          type: "success",
+        });
+      }
     }
   };
 

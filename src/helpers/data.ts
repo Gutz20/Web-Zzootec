@@ -281,12 +281,18 @@ export const rowsCategories = [
 ];
 
 export const columnsCategories: GridColDef[] = [
-  { field: "id", headerName: "Codigo", width: 90 },
+  { field: "id", headerName: "Codigo", flex: 1 },
   {
     field: "name",
     headerName: "Nom. Producto",
-    width: 400,
+    flex: 2,
     editable: true,
+  },
+  {
+    field: "creationDate",
+    headerName: "Fecha Creacion",
+    editable: false,
+    flex: 1,
   },
 ];
 
