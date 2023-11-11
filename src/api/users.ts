@@ -1,6 +1,8 @@
+import { UserSchemaInfer } from "@/models";
 import axios from "./axios";
 
-export const getUsersRequest = () => axios.get(`/api/v1/users/list`);
+export const getUsersRequest = async (): Promise<UserSchemaInfer[]> =>
+  (await axios.get(`/api/v1/users/list`)).data;
 
 export const getUserRequest = (id: number) => axios.get(`/api/v1/users/${id}`);
 

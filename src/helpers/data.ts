@@ -342,13 +342,13 @@ export const rowsEmployees = [
 export const columnsEmployees: GridColDef[] = [
   { field: "id", headerName: "Id", width: 90 },
   {
-    field: "name",
+    field: "fullName",
     headerName: "Empleado",
     width: 200,
     editable: true,
   },
   {
-    field: "gender",
+    field: "genre",
     headerName: "Sexo",
     width: 200,
     editable: true,
@@ -360,13 +360,13 @@ export const columnsEmployees: GridColDef[] = [
     editable: true,
   },
   {
-    field: "formEntry",
+    field: "creationDate",
     headerName: "F.Ingreso",
     width: 200,
     editable: true,
   },
   {
-    field: "formOut",
+    field: "departureDate",
     headerName: "F.Salida",
     width: 200,
     editable: true,

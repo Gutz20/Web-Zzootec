@@ -10,6 +10,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
 
 const Categories = () => {
   const queryClient = useQueryClient();
@@ -34,13 +35,13 @@ const Categories = () => {
     },
   });
 
-  console.log(categories);
-
   const rowsCategories = categories
     ? categories?.map((cat) => ({
         id: cat.id,
         name: cat.name,
-        creationDate: cat.creationDate,
+        creationDate: cat.creationDate
+          ? format(new Date(cat.creationDate), "dd/MM/yyyy HH:mm:ss")
+          : "",
       }))
     : [];
 
@@ -73,7 +74,7 @@ const Categories = () => {
   return (
     <div>
       <div className="flex flex-row justify-between mb-4">
-        <h2 className="text-4xl font-bold">Productos</h2>
+        <h2 className="text-4xl font-bold">Categorias</h2>
 
         <div className="flex gap-4">
           <Link to="/dashboard/categories/new">

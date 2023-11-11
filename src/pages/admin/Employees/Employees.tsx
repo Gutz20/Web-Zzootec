@@ -3,19 +3,21 @@ import {
   deleteCategoryRequest,
   deleteMultipleCategoryRequest,
 } from "@/api/categories";
+import { getUsersRequest } from "@/api/users";
 import { columnsEmployees, rowsEmployees } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridRowId, GridToolbar } from "@mui/x-data-grid";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 const Employees = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [selectedRowIds, setSelectedRowIds] = useState<GridRowId[]>([]);
   const { data: employees, isLoading } = useQuery({
-    queryFn: async () => await getCategoriesRequest(),
+    queryFn: async () => await getUsersRequest(),
     queryKey: ["employees"],
   });
 
@@ -36,7 +38,15 @@ const Employees = () => {
   const rowsEmployees = employees
     ? employees?.map((emp) => ({
         id: emp.id,
-        name: emp.name,
+        fullName: emp.firstName + " " + emp.lastName,
+        genre: emp.genre,
+        contract: emp.contract,
+        creationDate: emp.creationDate
+          ? format(new Date(emp.creationDate), "dd/MM/yyyy HH:mm:ss")
+          : "",
+        departureDate: emp.departureDate
+          ? format(new Date(emp.departureDate), "dd/MM/yyyy HH:mm:ss")
+          : "Ninguno",
       }))
     : [];
 
