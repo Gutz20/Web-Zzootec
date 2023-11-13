@@ -23,7 +23,7 @@ import {
 } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router-dom";
 
-const DeliveryId = () => {
+const DeliveryForm = () => {
   const {
     register,
     handleSubmit,
@@ -33,10 +33,10 @@ const DeliveryId = () => {
     resolver: zodResolver(formDeliverySchema),
     mode: "onChange",
   });
-  const { deliveryId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {}, [deliveryId]);
+  useEffect(() => {}, [id]);
 
   const onSubmit: SubmitHandler<FormSchemaDelivery> = async (data) => {
     console.log(data);
@@ -178,4 +178,4 @@ const DeliveryId = () => {
   );
 };
 
-export default DeliveryId;
+export default DeliveryForm;

@@ -11,7 +11,8 @@ import {
   Customers,
   Dashboard,
   Delivery,
-  DeliveryId,
+  DeliveryForm,
+  EmployeeForm,
   Employees,
   Login,
   Marketing,
@@ -61,11 +62,11 @@ function App() {
         },
         {
           path: "/dashboard/delivery/new",
-          element: <Delivery />,
+          element: <DeliveryForm />,
         },
         {
           path: "/dashboard/delivery/:id",
-          element: <DeliveryId />,
+          element: <DeliveryForm />,
         },
         {
           path: "/dashboard/orders",
@@ -90,6 +91,14 @@ function App() {
         {
           path: "/dashboard/employees",
           element: <Employees />,
+        },
+        {
+          path: "/dashboard/employees/new",
+          element: <EmployeeForm />,
+        },
+        {
+          path: "/dashboard/employees/:id",
+          element: <EmployeeForm />,
         },
         {
           path: "/dashboard/marketing",

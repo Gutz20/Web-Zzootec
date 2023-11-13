@@ -1,16 +1,16 @@
 import {
-  getCategoriesRequest,
-  deleteCategoryRequest,
-  deleteMultipleCategoryRequest,
-} from "@/api/categories";
-import { getUsersRequest } from "@/api/users";
-import { columnsEmployees, rowsEmployees } from "@/helpers/data";
+  deleteMultipleUserRequest,
+  deleteUserRequest,
+  getUsersRequest,
+} from "@/api/users";
+import { columnsEmployees } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridRowId, GridToolbar } from "@mui/x-data-grid";
-import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Employees = () => {
   const queryClient = useQueryClient();
@@ -21,19 +21,43 @@ const Employees = () => {
     queryKey: ["employees"],
   });
 
-  const { mutateAsync: deleteUserMutation } = useMutation({
-    mutationFn: deleteCategoryRequest,
+  const { mutateAsync: deleteEmployeMutation } = useMutation({
+    mutationFn: deleteUserRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
     },
   });
 
-  const { mutateAsync: deleteMultUserMutation } = useMutation({
-    mutationFn: deleteMultipleCategoryRequest,
+  const { mutateAsync: deleteMultEmployeMutation } = useMutation({
+    mutationFn: deleteMultipleUserRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
     },
   });
+
+  const handleEditClick = () => {
+    if (selectedRowIds !== null) {
+      navigate(`/dashboard/employees/${selectedRowIds[0]}`);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (selectedRowIds !== null) {
+      if (selectedRowIds.length === 1) {
+        deleteEmployeMutation(selectedRowIds[0] as number);
+        toast("Fila eliminada", {
+          position: "bottom-right",
+          type: "success",
+        });
+      } else {
+        deleteMultEmployeMutation(selectedRowIds as number[]);
+        toast("Se eliminaron las filas seleccionadas", {
+          position: "bottom-right",
+          type: "success",
+        });
+      }
+    }
+  };
 
   const rowsEmployees = employees
     ? employees?.map((emp) => ({
@@ -50,11 +74,7 @@ const Employees = () => {
       }))
     : [];
 
-  const handleEditClick = () => {
-    if (selectedRowIds !== null) {
-      navigate(`/dashboard/categories/${selectedRowIds[0]}`);
-    }
-  };
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div>
@@ -62,16 +82,18 @@ const Employees = () => {
         <h2 className="text-4xl font-bold">Empleados</h2>
 
         <div className="flex gap-4">
-          <Button color="info" variant="contained">
-            Nuevo
-          </Button>
+          <Link to="/dashboard/employees/new">
+            <Button color="info" variant="contained">
+              Nuevo
+            </Button>
+          </Link>
           <Button color="success" variant="contained">
             Guardar
           </Button>
-          <Button color="inherit" variant="contained">
+          <Button onClick={handleEditClick} color="inherit" variant="contained">
             Editar
           </Button>
-          <Button color="error" variant="contained">
+          <Button onClick={handleDeleteClick} color="error" variant="contained">
             Eliminar
           </Button>
         </div>
@@ -91,6 +113,9 @@ const Employees = () => {
           pageSizeOptions={[5]}
           checkboxSelection
           disableRowSelectionOnClick
+          onRowSelectionModelChange={(newSelection) => {
+            setSelectedRowIds(newSelection);
+          }}
           slots={{ toolbar: GridToolbar }}
           slotProps={{
             toolbar: {

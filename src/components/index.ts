@@ -2,6 +2,8 @@ export * from './DrawerNav';
 export * from './ForgotPassword';
 export { default as Header } from './Header/Header';
 export * from './Layout';
+export * from './MyInputForm/MyFilledInput';
+export * from './MyInputForm';
 export * from './Navbar';
 export * from './NotFound';
 export * from './ProtectedRoute';

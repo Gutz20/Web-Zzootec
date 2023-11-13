@@ -49,3 +49,19 @@ export const formCategorySchema = z.object({
 });
 
 export type FormSchemaCategory = z.infer<typeof formCategorySchema>;
+
+export const formUserSchema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string().email(),
+  username: z.string(),
+  password: z.string(),
+  roles: z.array(
+    z.object({
+      name: z.enum(["ADMIN", "USER", "INVITED"]),
+    })
+  ),
+  // genre: z.enum(["HOMBRE", "MUJER", "OTRO"]),
+});
+
+export type FormSchemaUser = z.infer<typeof formUserSchema>;
