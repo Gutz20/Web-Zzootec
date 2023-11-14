@@ -1,5 +1,5 @@
-import { createCategoryRequest, updateCategoryRequest } from "@/api/categories";
-import { getUserRequest } from "@/api/users";
+import { updateCategoryRequest } from "@/api/categories";
+import { createUserRequest, getUserRequest } from "@/api/users";
 import { FormSchemaUser, formUserSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,20 +14,20 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
-  Select,
+  Select
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import {
   RiEyeLine,
   RiEyeOffLine,
   RiLock2Line,
   RiMailLine,
-  RiScales3Line,
   RiUser2Line,
-  RiUserLine,
+  RiUserLine
 } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router-dom";
+import z from "zod";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,26 +40,39 @@ const MenuProps = {
   },
 };
 
-const roles = ["ADMIN", "USER", "INVITED"];
+const roles = z.array(
+  z.object({
+    name: z.enum(["ADMIN", "USER", "INVITED"]),
+  })
+);
+
+const contracts = ["FULLTIME", "PARTTIME", "TEMPORARY"];
+
+const genres = ["HOMBRE", "MUJER", "FORASTERO", "NO_BINARIO", "TRANSFORMER", "TRABUCO", "OTRO"];
+
+export type rolesType = z.infer<typeof roles>;
 
 const EmployeeForm = () => {
-  const [rolesName, setRolesName] = React.useState<string[]>([]);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
     setValue,
+    reset,
+    watch
   } = useForm<FormSchemaUser>({
     resolver: zodResolver(formUserSchema),
     mode: "onChange",
   });
 
   useEffect(() => {
-    const loadCategory = async () => {
+    const loadUser = async () => {
       if (params.id) {
         const user = await getUserRequest(Number(params.id));
         setValue("firstName", user.firstName);
@@ -67,11 +80,16 @@ const EmployeeForm = () => {
         setValue("email", user.email);
         setValue("username", user.username);
         setValue("password", user.password);
-        setValue("roles", user.roles);
-        //   setValue("user", user.firstName);
+
+        const roleNames = user.roles.map(role => role.name);
+        setSelectedRoles(roleNames);
+        setValue("roles", roleNames);
+
+        setValue("contract", user.contract);
+        setValue("genre", user.genre);
       }
     };
-    loadCategory();
+    loadUser();
   }, [params.id]);
 
   const onSubmit: SubmitHandler<FormSchemaUser> = async (data) => {
@@ -84,18 +102,27 @@ const EmployeeForm = () => {
           creationDate: null,
         });
       } else {
-        createCategoryRequest({
-          id: null,
-          name: data.firstName,
-          creationDate: null,
+        createUserRequest({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          username: data.username,
+          password: data.password,
+          roles: data.roles,
+          contract: data.contract,
+          genre: data.genre,
         });
+        setSelectedRoles([]);
+        reset();
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onError = () => {};
+  const onError: SubmitErrorHandler<FormSchemaUser> = async (data) => {
+    console.log(data);
+  };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -109,8 +136,8 @@ const EmployeeForm = () => {
     <div>
       <form
         className="bg-gray-100 p-4"
-        onSubmit={handleSubmit(onSubmit)}
-        onError={onError}
+        onSubmit={handleSubmit(onSubmit, onError)}
+
       >
         <h2 className="text-4xl font-bold tracking-widest mb-4">Datos</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -250,60 +277,87 @@ const EmployeeForm = () => {
               render={({ field: { ref, onChange } }) => {
                 return (
                   <FormControl variant="filled">
-                    <InputLabel id="roles-multiples">Roles</InputLabel>
+                    <InputLabel id="roles-selected">Roles</InputLabel>
                     <Select
-                      labelId="roles-multiples"
+                      labelId="roles-selected"
                       variant="filled"
+                      value={selectedRoles}
                       multiple
-                      value={rolesName}
                       inputRef={ref}
+                      input={<FilledInput />}
                       onChange={(e) => {
                         const {
                           target: { value },
                         } = e;
-                        setRolesName(
-                          typeof value === "string" ? value.split(",") : value
+
+                        setSelectedRoles(
+                          typeof value === 'string' ? value.split(',') : value,
                         );
                         onChange(value);
                       }}
-                      input={<FilledInput />}
                       renderValue={(selected) => selected.join(", ")}
                       MenuProps={MenuProps}
                     >
-                      {roles.map((rol) => (
-                        <MenuItem key={rol} value={rol}>
-                          <Checkbox checked={rolesName.indexOf(rol) > -1} />
-                          <ListItemText primary={rol} />
-                        </MenuItem>
-                      ))}
+                      <MenuItem value="ADMIN">
+                        <Checkbox checked={selectedRoles.includes("ADMIN")} />
+                        <ListItemText primary={"Admin"} />
+                      </MenuItem>
+                      <MenuItem value="USER">
+                        <Checkbox checked={selectedRoles.includes("USER")} />
+                        <ListItemText primary={"Usuario"} />
+                      </MenuItem>
+                      <MenuItem value="INVITED">
+                        <Checkbox checked={selectedRoles.includes("INVITED")} />
+                        <ListItemText primary={"Invitado"} />
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 );
               }}
-            ></Controller>
+            />
           </div>
-          {/* 
-          <div className="flex flex-col">
-            <span className="flex items-center justify-center">
-              <RiScales3Line className="text-xl" />
-            </span>
-            <FormControl variant="filled" fullWidth>
-              <InputLabel id="contract-label">Genero</InputLabel>
+          <div className="flex gap-4">
+            <FormControl
+              variant="filled"
+              fullWidth
+            >
+              <InputLabel id="contract-label">Contracto</InputLabel>
               <Select
                 labelId="contract-label"
-                defaultValue={""}
+                value={watch("contract") || ""}
+                variant="filled"
+                {...register("contract")}
+              >
+                <MenuItem value="">
+                  <em>Ninguno</em>
+                </MenuItem>
+                {contracts.map((contract, i) => (
+                  <MenuItem key={i} value={contract}>{contract}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div className="flex gap-4">
+            <FormControl
+              variant="filled"
+              fullWidth
+            >
+              <InputLabel id="genre-label">Genero</InputLabel>
+              <Select
+                labelId="genre-label"
+                value={watch("genre") || ""}
                 variant="filled"
                 {...register("genre")}
               >
                 <MenuItem value="">
                   <em>Ninguno</em>
                 </MenuItem>
-                <MenuItem value={"HOMBRE"}>Hombre</MenuItem>
-                <MenuItem value={"MUJER"}>Mujer</MenuItem>
-                <MenuItem value={"OTRO"}>Otro</MenuItem>
+                {genres.map((genre, i) => (
+                  <MenuItem key={i} value={genre}>{genre}</MenuItem>
+                ))}
               </Select>
             </FormControl>
-          </div> */}
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4 mt-4">

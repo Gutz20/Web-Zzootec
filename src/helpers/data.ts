@@ -251,13 +251,13 @@ export const columnsProducts: GridColDef[] = [
   {
     field: "type",
     headerName: "Tipo",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "provider",
     headerName: "Proveedor",
-    width: 200,
+    flex: 1,
     editable: true,
   },
 ];

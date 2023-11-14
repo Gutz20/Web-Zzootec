@@ -61,17 +61,17 @@ const Employees = () => {
 
   const rowsEmployees = employees
     ? employees?.map((emp) => ({
-        id: emp.id,
-        fullName: emp.firstName + " " + emp.lastName,
-        genre: emp.genre,
-        contract: emp.contract,
-        creationDate: emp.creationDate
-          ? format(new Date(emp.creationDate), "dd/MM/yyyy HH:mm:ss")
-          : "",
-        departureDate: emp.departureDate
-          ? format(new Date(emp.departureDate), "dd/MM/yyyy HH:mm:ss")
-          : "Ninguno",
-      }))
+      id: emp.id,
+      fullName: emp.firstName + " " + emp.lastName,
+      genre: emp.genre,
+      contract: emp.contract,
+      creationDate: emp.creationDate
+        ? format(new Date(emp.creationDate), "dd/MM/yyyy HH:mm:ss")
+        : "",
+      departureDate: emp.departureDate
+        ? format(new Date(emp.departureDate), "dd/MM/yyyy HH:mm:ss")
+        : "Ninguno",
+    }))
     : [];
 
   if (isLoading) return <div>Loading...</div>;

@@ -56,12 +56,18 @@ export const formUserSchema = z.object({
   email: z.string().email(),
   username: z.string(),
   password: z.string(),
-  roles: z.array(
-    z.object({
-      name: z.enum(["ADMIN", "USER", "INVITED"]),
-    })
-  ),
-  // genre: z.enum(["HOMBRE", "MUJER", "OTRO"]),
+  roles: z.array(z.enum(["ADMIN", "USER", "INVITED"])),
+  contract: z.enum(["", "FULLTIME", "PARTTIME", "TEMPORARY"]),
+  genre: z.enum([
+    "HOMBRE",
+    "MUJER",
+    "FORASTERO",
+    "NO_BINARIO",
+    "TRANSFORMER",
+    "TRABUCO",
+    "OTRO",
+    "",
+  ]),
 });
 
 export type FormSchemaUser = z.infer<typeof formUserSchema>;
