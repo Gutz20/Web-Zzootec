@@ -1,7 +1,7 @@
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import { ForgotPassword, Layout, NotFound, ProtectedRoute } from "./components";
 import {
@@ -17,6 +17,7 @@ import {
   Login,
   Marketing,
   Orders,
+  ProductForm,
   Products,
   Reports,
   Subsidiaries,
@@ -75,6 +76,14 @@ function App() {
         {
           path: "/dashboard/products",
           element: <Products />,
+        },
+        {
+          path: "/dashboard/products/new",
+          element: <ProductForm />,
+        },
+        {
+          path: "/dashboard/products/:id",
+          element: <ProductForm />,
         },
         {
           path: "/dashboard/categories",

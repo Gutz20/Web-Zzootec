@@ -4,13 +4,13 @@ import axios from "./axios";
 export const getProductsRequest = async (): Promise<ProductSchemaInfer[]> =>
   (await axios.get(`/api/v1/products`)).data;
 
-export const getProductRequest = (id: number) =>
-  axios.get(`/api/v1/products/${id}`);
+export const getProductRequest = async (id: number) =>
+  (await axios.get(`/api/v1/products/${id}`)).data;
 
-export const createProductRequest = (product: any) =>
+export const createProductRequest = (product: ProductSchemaInfer) =>
   axios.post(`/api/v1/products`, product);
 
-export const updateProductRequest = (id: number, product: any) =>
+export const updateProductRequest = (id: number, product: ProductSchemaInfer) =>
   axios.put(`/api/v1/products/${id}`, product);
 
 export const deleteProductRequest = (id: number) =>

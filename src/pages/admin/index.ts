@@ -12,6 +12,8 @@ export * from './Employees/components';
 export * from './Employees';
 export * from './Marketing';
 export * from './Orders';
+export * from './Products/components/ProductForm';
+export * from './Products/components';
 export * from './Products';
 export * from './Reports';
 export * from './Subsidiaries';

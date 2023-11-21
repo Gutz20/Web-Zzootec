@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { categorySchema } from "./category";
+import { providerSchema } from "./provider";
 
 export const productSchema = z.object({
   id: z.number().nullable(),
@@ -8,7 +9,7 @@ export const productSchema = z.object({
   price: z.number(),
   stock: z.number(),
   category: categorySchema,
-  provider: z.string(),
+  supplier: providerSchema,
 });
 
 export type ProductSchemaInfer = z.infer<typeof productSchema>;

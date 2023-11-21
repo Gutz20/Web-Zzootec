@@ -1,3 +1,5 @@
+import { categorySchema } from "@/models";
+import { providerSchema } from "@/models/provider";
 import { z } from "zod";
 
 export const formLoginSchema = z.object({
@@ -71,3 +73,15 @@ export const formUserSchema = z.object({
 });
 
 export type FormSchemaUser = z.infer<typeof formUserSchema>;
+
+export const formProductSchema = z.object({
+  id: z.number().nullable(),
+  name: z.string(),
+  image: z.string(),
+  price: z.number(),
+  stock: z.number(),
+  category: categorySchema,
+  supplier: providerSchema,
+});
+
+export type FormSchemaProduct = z.infer<typeof formProductSchema>;

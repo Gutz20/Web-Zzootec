@@ -1,12 +1,14 @@
-import { deleteMultipleProductRequest, deleteProductRequest, getProductsRequest } from "@/api/products";
-import { getUsersRequest, deleteUserRequest, deleteMultipleUserRequest } from "@/api/users";
-import { columnsProducts, rowsProducts } from "@/helpers/data";
+import {
+  deleteMultipleProductRequest,
+  deleteProductRequest,
+  getProductsRequest,
+} from "@/api/products";
+import { columnsProducts } from "@/helpers/data";
 import { Button } from "@mui/material";
 import { DataGrid, GridRowId, GridToolbar } from "@mui/x-data-grid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Products = () => {
@@ -59,13 +61,13 @@ const Products = () => {
 
   const rowsProducts = products
     ? products?.map((product) => ({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      stock: product.stock,
-      type: product.category.name,
-      provider: product.provider // TODO ARREGLAR ESTO >:v
-    }))
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        stock: product.stock,
+        type: product.category.name,
+        provider: product.supplier.contact, // TODO ARREGLAR ESTO >:v
+      }))
     : [];
 
   if (isLoading) return <div>Loading...</div>;
@@ -76,28 +78,18 @@ const Products = () => {
         <h2 className="text-4xl font-bold">Productos</h2>
 
         <div className="flex gap-4">
-          <Button
-            color="info"
-            variant="contained"
-          >
-            Nuevo
-          </Button>
-          <Button
-            color="success"
-            variant="contained"
-          >
+          <Link to="/dashboard/products/new">
+            <Button color="info" variant="contained">
+              Nuevo
+            </Button>
+          </Link>
+          <Button color="success" variant="contained">
             Guardar
           </Button>
-          <Button
-            color="inherit"
-            variant="contained"
-          >
+          <Button onClick={handleEditClick} color="inherit" variant="contained">
             Editar
           </Button>
-          <Button
-            color="error"
-            variant="contained"
-          >
+          <Button onClick={handleDeleteClick} color="error" variant="contained">
             Eliminar
           </Button>
         </div>
@@ -117,6 +109,9 @@ const Products = () => {
           pageSizeOptions={[5]}
           checkboxSelection
           disableRowSelectionOnClick
+          onRowSelectionModelChange={(newSelection) => {
+            setSelectedRowIds(newSelection);
+          }}
           slots={{ toolbar: GridToolbar }}
           slotProps={{
             toolbar: {

@@ -14,17 +14,22 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
-  Select
+  Select,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Controller, SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import {
+  Controller,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import {
   RiEyeLine,
   RiEyeOffLine,
   RiLock2Line,
   RiMailLine,
   RiUser2Line,
-  RiUserLine
+  RiUserLine,
 } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router-dom";
 import z from "zod";
@@ -48,7 +53,7 @@ const roles = z.array(
 
 const contracts = ["FULLTIME", "PARTTIME", "TEMPORARY"];
 
-const genres = ["HOMBRE", "MUJER", "FORASTERO", "NO_BINARIO", "TRANSFORMER", "TRABUCO", "OTRO"];
+const genres = ["HOMBRE", "MUJER"];
 
 export type rolesType = z.infer<typeof roles>;
 
@@ -65,7 +70,7 @@ const EmployeeForm = () => {
     control,
     setValue,
     reset,
-    watch
+    watch,
   } = useForm<FormSchemaUser>({
     resolver: zodResolver(formUserSchema),
     mode: "onChange",
@@ -81,7 +86,7 @@ const EmployeeForm = () => {
         setValue("username", user.username);
         setValue("password", user.password);
 
-        const roleNames = user.roles.map(role => role.name);
+        const roleNames = user.roles.map((role) => role.name);
         setSelectedRoles(roleNames);
         setValue("roles", roleNames);
 
@@ -137,7 +142,6 @@ const EmployeeForm = () => {
       <form
         className="bg-gray-100 p-4"
         onSubmit={handleSubmit(onSubmit, onError)}
-
       >
         <h2 className="text-4xl font-bold tracking-widest mb-4">Datos</h2>
         <div className="grid grid-cols-2 gap-4">
@@ -291,7 +295,7 @@ const EmployeeForm = () => {
                         } = e;
 
                         setSelectedRoles(
-                          typeof value === 'string' ? value.split(',') : value,
+                          typeof value === "string" ? value.split(",") : value
                         );
                         onChange(value);
                       }}
@@ -317,10 +321,7 @@ const EmployeeForm = () => {
             />
           </div>
           <div className="flex gap-4">
-            <FormControl
-              variant="filled"
-              fullWidth
-            >
+            <FormControl variant="filled" fullWidth>
               <InputLabel id="contract-label">Contracto</InputLabel>
               <Select
                 labelId="contract-label"
@@ -332,16 +333,15 @@ const EmployeeForm = () => {
                   <em>Ninguno</em>
                 </MenuItem>
                 {contracts.map((contract, i) => (
-                  <MenuItem key={i} value={contract}>{contract}</MenuItem>
+                  <MenuItem key={i} value={contract}>
+                    {contract}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </div>
           <div className="flex gap-4">
-            <FormControl
-              variant="filled"
-              fullWidth
-            >
+            <FormControl variant="filled" fullWidth>
               <InputLabel id="genre-label">Genero</InputLabel>
               <Select
                 labelId="genre-label"
@@ -353,7 +353,9 @@ const EmployeeForm = () => {
                   <em>Ninguno</em>
                 </MenuItem>
                 {genres.map((genre, i) => (
-                  <MenuItem key={i} value={genre}>{genre}</MenuItem>
+                  <MenuItem key={i} value={genre}>
+                    {genre}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
