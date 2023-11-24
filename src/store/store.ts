@@ -1,16 +1,16 @@
-import { UserSchemaInfer } from "@/models/user";
+import { UserAuthSchemaInfer } from "@/models/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
   token: string;
-  user: UserSchemaInfer;
+  user: UserAuthSchemaInfer;
   isAuth: boolean;
 };
 
 type Actions = {
   setToken: (token: string) => void;
-  setUser: (user: UserSchemaInfer) => void;
+  setUser: (user: UserAuthSchemaInfer) => void;
   logout: () => void;
 };
 
@@ -22,7 +22,7 @@ export const useAuthStore = create(
         username: "",
         password: "",
         email: "",
-        roles: "INVITED",
+        roles: [{ name: "INVITED" }],
       },
       isAuth: false,
       setToken: (token: string) =>
@@ -30,7 +30,7 @@ export const useAuthStore = create(
           token,
           isAuth: true,
         })),
-      setUser: (user: UserSchemaInfer) =>
+      setUser: (user: UserAuthSchemaInfer) =>
         set((_) => ({
           user,
         })),
@@ -42,7 +42,7 @@ export const useAuthStore = create(
             email: "",
             username: "",
             password: "",
-            roles: "INVITED",
+            roles: [{ name: "INVITED" }],
           },
         })),
     }),
