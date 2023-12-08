@@ -1,5 +1,9 @@
 import { updateCategoryRequest } from "@/api/categories";
-import { createUserRequest, getUserRequest } from "@/api/users";
+import {
+  createUserRequest,
+  getUserRequest,
+  updateUserRequest,
+} from "@/api/users";
 import { FormSchemaUser, formUserSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,7 +35,7 @@ import {
   RiUser2Line,
   RiUserLine,
 } from "react-icons/ri";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import z from "zod";
 
 const ITEM_HEIGHT = 48;
@@ -101,10 +105,15 @@ const EmployeeForm = () => {
     console.log(data);
     try {
       if (params.id) {
-        updateCategoryRequest(Number(params.id), {
-          id: Number(params.id),
-          name: data.firstName,
-          creationDate: null,
+        updateUserRequest(Number(params.id), {
+          email: data.email,
+          username: data.username,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          roles: data.roles,
+          password: data.password,
+          contract: data.contract,
+          genre: data.genre,
         });
       } else {
         createUserRequest({
@@ -363,15 +372,16 @@ const EmployeeForm = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-4 mt-4">
-          <Button
-            variant="outlined"
-            color="error"
-            className="w-full"
-            type="button"
-            onClick={() => navigate("/dashboard/employees")}
-          >
-            Cancelar
-          </Button>
+          <Link to=".." relative="path">
+            <Button
+              variant="outlined"
+              color="error"
+              className="w-full"
+              type="button"
+            >
+              Cancelar
+            </Button>
+          </Link>
           <Button variant="outlined" color="success" type="submit">
             Guardar
           </Button>

@@ -58,6 +58,14 @@ function App() {
           element: <Customers />,
         },
         {
+          path: "/dashboard/customers/new",
+          element: <EmployeeForm />,
+        },
+        {
+          path: "/dashboard/customers/:id",
+          element: <EmployeeForm />,
+        },
+        {
           path: "/dashboard/delivery",
           element: <Delivery />,
         },

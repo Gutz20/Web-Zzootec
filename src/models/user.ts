@@ -23,6 +23,8 @@ export const userSchema = z.object({
     })
   ),
   branch: z.string(),
+  address: z.string().optional().nullable(),
+  phone: z.string().optional().nullable(),
   creationDate: z.date().nullable(),
   departureDate: z.date().nullable(),
 });

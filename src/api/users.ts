@@ -11,7 +11,7 @@ export const getUserRequest = async (id: number): Promise<UserSchemaInfer> =>
 export const createUserRequest = async (user: FormSchemaUser) =>
   await axios.post(`/api/v1/users/create`, user);
 
-export const updateUserRequest = (id: number, user: any) =>
+export const updateUserRequest = (id: number, user: FormSchemaUser) =>
   axios.put(`/api/v1/users/${id}`, user);
 
 export const deleteUserRequest = (id: number) =>

@@ -16,8 +16,8 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { RiUser2Line } from "react-icons/ri";
-import { useNavigate, useParams } from "react-router-dom";
+import { RiBox2Line, RiUser2Line } from "react-icons/ri";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const CategoryForm = () => {
   const navigate = useNavigate();
@@ -28,6 +28,7 @@ const CategoryForm = () => {
     formState: { errors },
     control,
     setValue,
+    reset,
   } = useForm<FormSchemaCategory>({
     resolver: zodResolver(formCategorySchema),
     mode: "onChange",
@@ -57,9 +58,10 @@ const CategoryForm = () => {
           id: null,
           creationDate: null,
         });
+        reset();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -76,7 +78,7 @@ const CategoryForm = () => {
               <FilledInput
                 startAdornment={
                   <InputAdornment position="start">
-                    <RiUser2Line />
+                    <RiBox2Line />
                   </InputAdornment>
                 }
                 {...register("name")}
@@ -93,15 +95,16 @@ const CategoryForm = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mt-4">
-          <Button
-            variant="outlined"
-            color="error"
-            className="w-full"
-            type="button"
-            onClick={() => navigate("/dashboard/categories")}
-          >
-            Cancelar
-          </Button>
+          <Link relative="path" to="..">
+            <Button
+              variant="outlined"
+              color="error"
+              className="w-full"
+              type="button"
+            >
+              Cancelar
+            </Button>
+          </Link>
           <Button variant="outlined" color="success" type="submit">
             Guardar
           </Button>

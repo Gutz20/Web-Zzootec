@@ -59,31 +59,25 @@ export const columnsCustomers: GridColDef[] = [
   {
     field: "firstName",
     headerName: "Primer Nombre",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
-    field: "secondName",
+    field: "lastName",
     headerName: "Seg. Nombre",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "phoneNumber",
     headerName: "Telefono",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "numberRandom",
-    headerName: "Numero",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "address",
     headerName: "Dirección",
-    width: 200,
+    flex: 1,
     editable: true,
   },
 ];
@@ -281,11 +275,11 @@ export const rowsCategories = [
 ];
 
 export const columnsCategories: GridColDef[] = [
-  { field: "id", headerName: "Codigo", flex: 1 },
+  { field: "id", headerName: "Codigo", width: 90 },
   {
     field: "name",
     headerName: "Nom. Producto",
-    flex: 2,
+    flex: 1,
     editable: true,
   },
   {
@@ -344,31 +338,31 @@ export const columnsEmployees: GridColDef[] = [
   {
     field: "fullName",
     headerName: "Empleado",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "genre",
     headerName: "Sexo",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "contract",
     headerName: "Contrato",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "creationDate",
     headerName: "F.Ingreso",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "departureDate",
     headerName: "F.Salida",
-    width: 200,
+    flex: 1,
     editable: true,
   },
 ];
