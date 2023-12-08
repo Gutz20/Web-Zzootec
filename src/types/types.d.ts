@@ -80,7 +80,7 @@ export const formProductSchema = z.object({
   image: z.string(),
   price: z.number(),
   stock: z.number(),
-  category: categorySchema,
+  category: z.union([categorySchema, z.string()]),
   supplier: providerSchema,
 });
 

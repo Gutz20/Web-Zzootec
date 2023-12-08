@@ -29,8 +29,9 @@ import {
   RiSkipUpLine,
   RiStockLine,
   RiUser2Line,
+  RiUserAddLine,
 } from "react-icons/ri";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const ProductForm = () => {
     control,
     setValue,
     watch,
+    reset,
   } = useForm<FormSchemaProduct>({
     resolver: zodResolver(formProductSchema),
     mode: "onChange",
@@ -62,6 +64,10 @@ const ProductForm = () => {
       if (params.id) {
         const product = await getProductRequest(Number(params.id));
         setValue("name", product.name);
+        setValue("image", product.image);
+        setValue("price", product.price);
+        setValue("stock", product.stock);
+        setValue("category", product.category.name);
       }
     };
     loadProduct();
@@ -69,6 +75,10 @@ const ProductForm = () => {
 
   const onSubmit: SubmitHandler<FormSchemaProduct> = async (data) => {
     try {
+      const categoryValue =
+        typeof data.category === "string"
+          ? { id: null, name: data.category, creationDate: null }
+          : data.category;
       if (params.id) {
         updateProductRequest(Number(params.id), {
           id: Number(params.id),
@@ -76,7 +86,7 @@ const ProductForm = () => {
           image: data.image,
           price: data.price,
           stock: data.stock,
-          category: data.category,
+          category: categoryValue,
           supplier: data.supplier,
         });
       } else {
@@ -86,9 +96,10 @@ const ProductForm = () => {
           image: data.image,
           price: data.price,
           stock: data.stock,
-          category: data.category,
+          category: categoryValue,
           supplier: data.supplier,
         });
+        reset();
       }
     } catch (error) {
       console.log(error);
@@ -220,6 +231,31 @@ const ProductForm = () => {
               </Select>
             </FormControl>
           </div>
+          <div className="flex gap-4">
+            <FormControl variant="filled" fullWidth>
+              <InputLabel id="supplier-label">Proveedor</InputLabel>
+              <Select
+                labelId="supplier-label"
+                value={watch("supplier") || ""}
+                variant="filled"
+                {...register("supplier")}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <RiUserAddLine />
+                  </InputAdornment>
+                }
+              >
+                <MenuItem value="">
+                  <em>Ninguno</em>
+                </MenuItem>
+                {suppliers?.map((sup, i) => (
+                  <MenuItem key={i} value={sup.contact}>
+                    {sup.contact}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
           {/* <div className="flex gap-4">
             <FormControl variant="filled" fullWidth>
               <InputLabel id="suppplier-label">Proveedores</InputLabel>
@@ -247,15 +283,16 @@ const ProductForm = () => {
           </div> */}
         </div>
         <div className="grid grid-cols-2 gap-4 mt-4">
-          <Button
-            variant="outlined"
-            color="error"
-            className="w-full"
-            type="button"
-            onClick={() => navigate("/dashboard/products")}
-          >
-            Cancelar
-          </Button>
+          <Link relative="path" to="..">
+            <Button
+              variant="outlined"
+              color="error"
+              className="w-full"
+              type="button"
+            >
+              Cancelar
+            </Button>
+          </Link>
           <Button variant="outlined" color="success" type="submit">
             Guardar
           </Button>

@@ -4,7 +4,9 @@ import axios from "./axios";
 export const getProductsRequest = async (): Promise<ProductSchemaInfer[]> =>
   (await axios.get(`/api/v1/products`)).data;
 
-export const getProductRequest = async (id: number) =>
+export const getProductRequest = async (
+  id: number
+): Promise<ProductSchemaInfer> =>
   (await axios.get(`/api/v1/products/${id}`)).data;
 
 export const createProductRequest = (product: ProductSchemaInfer) =>

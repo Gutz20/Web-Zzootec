@@ -227,19 +227,19 @@ export const columnsProducts: GridColDef[] = [
   {
     field: "name",
     headerName: "Nom. Producto",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "price",
     headerName: "Precio",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
     field: "stock",
     headerName: "Stock",
-    width: 200,
+    flex: 1,
     editable: true,
   },
   {
