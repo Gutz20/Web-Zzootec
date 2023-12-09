@@ -1,10 +1,5 @@
 import { z } from "zod";
 
-export enum Status {
-  ACTIVO = "ACTIVO",
-  INACTIVO = "INACTIVO",
-}
-
 export enum TypeProvider {
   PRODUCTS = "PRODUCTS",
   SERVICES = "SERVICES",
@@ -17,7 +12,6 @@ export const providerSchema = z.object({
   type: z.nativeEnum(TypeProvider),
   bankInformation: z.string().nullable(),
   paymentTerms: z.array(z.string()),
-  status: z.nativeEnum(Status),
   notes: z.array(z.string()),
 });
 

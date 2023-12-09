@@ -75,7 +75,6 @@ export const formUserSchema = z.object({
 export type FormSchemaUser = z.infer<typeof formUserSchema>;
 
 export const formProductSchema = z.object({
-  id: z.number().nullable(),
   name: z.string(),
   image: z.string(),
   price: z.number(),

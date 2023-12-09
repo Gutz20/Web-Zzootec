@@ -7,7 +7,6 @@ import {
 import { getSuppliersRequest } from "@/api/providers";
 import {
   ProviderSchemaInfer,
-  Status,
   TypeProvider,
   providerSchema,
 } from "@/models/provider";
@@ -92,7 +91,6 @@ const ProductForm = () => {
         typeof data.supplier === "string"
           ? {
               id: null,
-              status: Status.ACTIVO,
               type: TypeProvider.PRODUCTS,
               contact: data.supplier,
               identifierFiscal: null,
