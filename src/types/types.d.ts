@@ -81,7 +81,7 @@ export const formProductSchema = z.object({
   price: z.number(),
   stock: z.number(),
   category: z.union([categorySchema, z.string()]),
-  supplier: providerSchema,
+  supplier: z.union([providerSchema, z.string()]),
 });
 
 export type FormSchemaProduct = z.infer<typeof formProductSchema>;

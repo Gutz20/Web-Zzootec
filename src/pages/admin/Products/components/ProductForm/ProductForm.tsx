@@ -5,6 +5,12 @@ import {
   updateProductRequest,
 } from "@/api/products";
 import { getSuppliersRequest } from "@/api/providers";
+import {
+  ProviderSchemaInfer,
+  Status,
+  TypeProvider,
+  providerSchema,
+} from "@/models/provider";
 import { FormSchemaProduct, formProductSchema } from "@/types";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,6 +38,7 @@ import {
   RiUserAddLine,
 } from "react-icons/ri";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { z } from "zod";
 
 const ProductForm = () => {
   const navigate = useNavigate();
@@ -68,6 +75,7 @@ const ProductForm = () => {
         setValue("price", product.price);
         setValue("stock", product.stock);
         setValue("category", product.category.name);
+        setValue("supplier", product.supplier.contact);
       }
     };
     loadProduct();
@@ -79,6 +87,21 @@ const ProductForm = () => {
         typeof data.category === "string"
           ? { id: null, name: data.category, creationDate: null }
           : data.category;
+
+      const supplierValue =
+        typeof data.supplier === "string"
+          ? {
+              id: null,
+              status: Status.ACTIVO,
+              type: TypeProvider.PRODUCTS,
+              contact: data.supplier,
+              identifierFiscal: null,
+              bankInformation: null,
+              paymentTerms: [""],
+              notes: [""],
+            }
+          : data.supplier;
+
       if (params.id) {
         updateProductRequest(Number(params.id), {
           id: Number(params.id),
@@ -87,7 +110,7 @@ const ProductForm = () => {
           price: data.price,
           stock: data.stock,
           category: categoryValue,
-          supplier: data.supplier,
+          supplier: supplierValue,
         });
       } else {
         createProductRequest({
@@ -97,7 +120,7 @@ const ProductForm = () => {
           price: data.price,
           stock: data.stock,
           category: categoryValue,
-          supplier: data.supplier,
+          supplier: supplierValue,
         });
         reset();
       }
