@@ -100,6 +100,7 @@ const ProductForm = () => {
             }
           : data.supplier;
 
+
       if (params.id) {
         updateProductRequest(Number(params.id), {
           id: Number(params.id),
