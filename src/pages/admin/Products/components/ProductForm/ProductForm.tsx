@@ -25,10 +25,8 @@ import {
   RiBox2Line,
   RiImage2Line,
   RiPriceTag3Line,
-  RiSkipUpFill,
-  RiSkipUpLine,
   RiStockLine,
-  RiUser2Line,
+  RiUser2Line
 } from "react-icons/ri";
 import { useNavigate, useParams } from "react-router-dom";
 
